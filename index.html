@@ -3,17 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SYNAPSE | Transcend Human Limits - Cybernetic Implants & Augmentations</title>
-  <meta name="description" content="Synthesize your consciousness with quantum cybernetics. Explore premium sub-dermal plates, neural processors, and interactive cyborg diagnostics at Synapse.">
+  <title>TECHFEST 2026 | Neural Nexus - Immersive 3D Tech Carnival</title>
+  <meta name="description" content="Immerse yourself in the quantum wave of Techfest 2026. Explore WebGL 3D scroll transitions, customize cyber-cores, and register for championships in robotics, coding, and aerospace.">
   <link rel="stylesheet" href="style.css">
+  <!-- Three.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
+
+  <!-- Background WebGL Canvas -->
+  <canvas id="webgl-canvas"></canvas>
 
   <!-- Scanning Line Overlay -->
   <div class="scanlines"></div>
 
+  <!-- Custom Tech Cursor -->
+  <div class="custom-cursor" id="custom-cursor"></div>
+  <div class="custom-cursor-dot" id="custom-cursor-dot"></div>
+
   <!-- Audio Control Toggle -->
-  <div class="audio-ctrl" id="audio-toggle" title="Toggle Interactive SFX">
+  <div class="audio-ctrl" id="audio-toggle" title="Toggle Interactive SFX & Ambient Synth">
     <span></span> AUDIO: OFF
   </div>
 
@@ -21,23 +30,23 @@
   <header>
     <div class="nav-container">
       <a href="#" class="logo">
-        <span class="logo-bracket">[</span>SYNAPSE<span class="logo-bracket">]</span><span class="logo-dot">.</span>
+        <span class="logo-bracket">[</span>TECHFEST<span class="logo-bracket">]</span><span class="logo-dot">.26</span>
       </a>
       
       <ul class="nav-menu">
-        <li><a href="#features" class="nav-link">Features</a></li>
-        <li><a href="#customizer" class="nav-link">Neural Schematic</a></li>
-        <li><a href="#configurator" class="nav-link">Upgrade Hub</a></li>
-        <li><a href="#faq" class="nav-link">FAQ</a></li>
+        <li><a href="#tracks" class="nav-link">Arena Tracks</a></li>
+        <li><a href="#customizer" class="nav-link">Core Customizer</a></li>
+        <li><a href="#schedule" class="nav-link">Timeline</a></li>
+        <li><a href="#faq" class="nav-link">Database FAQ</a></li>
       </ul>
 
       <div class="nav-right">
         <div class="sync-status">
           <div class="sync-indicator"></div>
-          <span class="mono">SYNC: ACTIVE</span>
+          <span class="mono">PORTAL: ACTIVE</span>
         </div>
-        <a href="#configurator" class="btn-cyber btn-cyber-magenta" style="font-size: 0.75rem; padding: 8px 18px;">
-          Direct Link
+        <a href="#register" class="btn-cyber btn-cyber-magenta" style="font-size: 0.75rem; padding: 8px 18px;">
+          SECURE SEAT
         </a>
       </div>
 
@@ -50,33 +59,33 @@
   </header>
 
   <!-- --- HERO SECTION --- -->
-  <section class="hero">
+  <section class="hero" id="hero">
     <div class="hero-container">
       
       <div class="hero-content">
         <div class="hero-badge">
-          <span></span> SYSTEM PROTOCOL V8.12 STABLE
+          <span></span> QUANTUM PROTOCOL T26 // PORTAL ONLINE
         </div>
         <h1 class="hero-title">
-          Transcend The<br><span>Human Limit</span>
+          Entering The<br><span>Neural Nexus</span>
         </h1>
         <p class="hero-description">
-          Synthesize your biology with cutting-edge cybernetic augmentations. Accelerate your synaptic transmission speeds, unlock high-bandwidth memory indexing, and fuse your consciousness with quantum processor nodes.
+          Unleash raw cognitive power at India's premier sci-tech festival. Warp through 3D scroll spaces, program neural machinery, and compete alongside thousands of visionaries in the quantum arena.
         </p>
         
         <div class="hero-actions">
-          <a href="#configurator" class="btn-cyber">
-            Upgrade Now <span class="mono">//</span>
+          <a href="#register" class="btn-cyber">
+            REGISTER NOW <span class="mono">//</span>
           </a>
           <a href="#customizer" class="btn-cyber btn-cyber-magenta">
-            Scan Schematic
+            CUSTOMIZE CORE
           </a>
         </div>
 
         <!-- Terminal Panel -->
         <div class="hero-terminal glass-card tech-card">
           <div class="terminal-header">
-            <span>NEURAL_LINK_CONSOLE // ACTIVE</span>
+            <span>TECHFEST_CONSOLE_STABLE // SEED:812</span>
             <div class="terminal-dots">
               <div class="terminal-dot"></div>
               <div class="terminal-dot"></div>
@@ -90,170 +99,127 @@
         </div>
       </div>
 
-      <div class="hero-visual">
-        <div class="hologram-circle"></div>
-        <div class="cyborg-portrait-wrapper">
-          <div class="cyborg-hud-tag">LOCKED</div>
-          <div class="cyber-scanline"></div>
-          <img src="assets/cyborg_hero.png" alt="Cyborg Neural Interface Model" class="cyborg-image">
+      <!-- Empty spacer for desktop view so the WebGL core renders beautifully on the right side -->
+      <div class="hero-visual-placeholder">
+        <div class="countdown-card glass-card tech-card-alt">
+          <div class="countdown-title mono">WARP_DEVIATION_LOCKDOWN</div>
+          <div class="countdown-grid">
+            <div class="countdown-item">
+              <span id="countdown-days" class="countdown-val">00</span>
+              <span class="countdown-label">DAYS</span>
+            </div>
+            <div class="countdown-item">
+              <span id="countdown-hours" class="countdown-val">00</span>
+              <span class="countdown-label">HRS</span>
+            </div>
+            <div class="countdown-item">
+              <span id="countdown-mins" class="countdown-val">00</span>
+              <span class="countdown-label">MINS</span>
+            </div>
+            <div class="countdown-item">
+              <span id="countdown-secs" class="countdown-val">00</span>
+              <span class="countdown-label">SECS</span>
+            </div>
+          </div>
+          <div class="countdown-status mono">SYS: COUNTING_T_MINUS_STABLE</div>
         </div>
       </div>
 
     </div>
   </section>
 
-  <!-- --- CORE STATS --- -->
+  <!-- --- PORTAL METRICS --- -->
   <section class="stats-section">
     <div class="stats-container">
       
       <div class="stat-item glass-card tech-card">
-        <div class="stat-val" id="stat-bandwidth" data-value="4.5" data-suffix=" TB/s">0</div>
-        <div class="stat-label">Cognitive Bandwidth</div>
+        <div class="stat-val" id="stat-prize" data-value="150" data-prefix="$" data-suffix="K+">0</div>
+        <div class="stat-label">Prize Pool Value</div>
       </div>
 
       <div class="stat-item glass-card tech-card">
-        <div class="stat-val" id="stat-sync" data-value="99.42" data-suffix="%">0</div>
-        <div class="stat-label">Neural Sync Rate</div>
+        <div class="stat-val" id="stat-events" data-value="45" data-suffix="+">0</div>
+        <div class="stat-label">Grand Championships</div>
       </div>
 
       <div class="stat-item glass-card tech-card">
-        <div class="stat-val" id="stat-users" data-value="124800" data-suffix="+">0</div>
-        <div class="stat-label">Augmented Citizens</div>
+        <div class="stat-val" id="stat-hackers" data-value="8500" data-suffix="+">0</div>
+        <div class="stat-label">Elite Competitors</div>
       </div>
 
       <div class="stat-item glass-card tech-card">
-        <div class="stat-val" id="stat-latency" data-value="0.14" data-suffix="ms">0</div>
-        <div class="stat-label">Synaptic Latency</div>
+        <div class="stat-val" id="stat-keynotes" data-value="12" data-suffix=" Speakers">0</div>
+        <div class="stat-label">Global Innovators</div>
       </div>
 
     </div>
   </section>
 
-  <!-- --- CYBORG DYNAMIC CUSTOMIZER --- -->
+  <!-- --- 3D INTERACTIVE CUSTOMIZER --- -->
   <section class="customizer" id="customizer">
     <div class="section-header">
-      <span class="subtitle">System Visualizer</span>
-      <h2 class="title">Neural Assembly Schematic</h2>
+      <span class="subtitle">IMMEDIATE VISUAL FEEDBACK</span>
+      <h2 class="title">Quantum Core Tuning</h2>
     </div>
 
     <div class="customizer-grid">
       
-      <!-- Cyborg Blueprint Interactive SVG -->
-      <div class="blueprint-wrapper">
-        
-        <!-- Interactive hotspots -->
-        <div class="hotspot active" data-target="neural" title="Cortex Processor">
-          <div class="hotspot-ring"></div>
-          <div class="hotspot-dot"></div>
-        </div>
-        <div class="hotspot" data-target="optical" title="Optical HUD Matrix">
-          <div class="hotspot-ring"></div>
-          <div class="hotspot-dot"></div>
-        </div>
-        <div class="hotspot" data-target="core" title="Nano-Fusion Core">
-          <div class="hotspot-ring"></div>
-          <div class="hotspot-dot"></div>
-        </div>
-        <div class="hotspot" data-target="arm" title="Actuator Cybernetic Arm">
-          <div class="hotspot-ring"></div>
-          <div class="hotspot-dot"></div>
-        </div>
-        <div class="hotspot" data-target="legs" title="Kinetic Dampener Legs">
-          <div class="hotspot-ring"></div>
-          <div class="hotspot-dot"></div>
-        </div>
+      <!-- Empty space for the 3D Core to float on the left side during customizer segment -->
+      <div class="customizer-webgl-area"></div>
 
-        <svg class="blueprint-svg" viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
-          <!-- Background grids & tech circles -->
-          <circle cx="200" cy="250" r="160" stroke="rgba(0, 243, 255, 0.05)" stroke-width="1" fill="none" />
-          <circle cx="200" cy="250" r="120" stroke="rgba(0, 243, 255, 0.03)" stroke-width="1" fill="none" stroke-dasharray="10, 10" />
-          
-          <!-- Silhouette Stylized Wireframe -->
-          <!-- Head -->
-          <circle cx="200" cy="80" r="28" class="blueprint-paths" />
-          <path d="M190 70 L210 70 M190 85 L210 85" stroke="rgba(0, 243, 255, 0.4)" stroke-width="1.5" />
-          
-          <!-- Torso -->
-          <path d="M172 135 L228 135 L215 220 L185 220 Z" class="blueprint-paths" />
-          <circle cx="200" cy="178" r="12" stroke="rgba(255, 0, 85, 0.4)" stroke-width="2" fill="none" />
-          
-          <!-- Neck -->
-          <path d="M194 108 L194 135 M206 108 L206 135" class="blueprint-paths" />
-          
-          <!-- Arms -->
-          <!-- Left Arm -->
-          <path d="M172 135 L145 190 L135 240" class="blueprint-paths" />
-          <circle cx="145" cy="190" r="6" fill="rgba(0, 243, 255, 0.2)" stroke="var(--neon-cyan)" stroke-width="1" />
-          <circle cx="135" cy="240" r="5" fill="rgba(0, 243, 255, 0.2)" stroke="var(--neon-cyan)" stroke-width="1" />
-          
-          <!-- Right Arm -->
-          <path d="M228 135 L255 190 L265 240" class="blueprint-paths" />
-          <circle cx="255" cy="190" r="6" fill="rgba(0, 243, 255, 0.2)" stroke="var(--neon-cyan)" stroke-width="1" />
-          <circle cx="265" cy="240" r="5" fill="rgba(0, 243, 255, 0.2)" stroke="var(--neon-cyan)" stroke-width="1" />
-          
-          <!-- Legs -->
-          <!-- Left Leg -->
-          <path d="M185 220 L175 310 L185 410 L175 450" class="blueprint-paths" />
-          <circle cx="175" cy="310" r="6" fill="rgba(0, 243, 255, 0.2)" stroke="var(--neon-cyan)" stroke-width="1" />
-          <circle cx="185" cy="410" r="6" fill="rgba(0, 243, 255, 0.2)" stroke="var(--neon-cyan)" stroke-width="1" />
-          
-          <!-- Right Leg -->
-          <path d="M215 220 L225 310 L215 410 L225 450" class="blueprint-paths" />
-          <circle cx="225" cy="310" r="6" fill="rgba(0, 243, 255, 0.2)" stroke="var(--neon-cyan)" stroke-width="1" />
-          <circle cx="215" cy="410" r="6" fill="rgba(0, 243, 255, 0.2)" stroke="var(--neon-cyan)" stroke-width="1" />
-          
-          <!-- Schematic Grid Indicators -->
-          <line x1="20" y1="250" x2="380" y2="250" stroke="rgba(0, 243, 255, 0.05)" stroke-width="1" stroke-dasharray="5, 5" />
-          <line x1="200" y1="20" x2="200" y2="480" stroke="rgba(0, 243, 255, 0.05)" stroke-width="1" stroke-dasharray="5, 5" />
-        </svg>
-      </div>
-
-      <!-- Detail Info Display Panel -->
-      <div class="hologram-panel glass-card tech-card-alt">
+      <!-- Controls Panel on the Right -->
+      <div class="customizer-hud-panel glass-card tech-card-alt">
         <div class="panel-header">
           <div class="panel-title-wrapper">
-            <h3 id="panel-title">Synapse Cortex V4</h3>
-            <span class="panel-id" id="panel-id">SPEC_ID // MOD_NRL_09X</span>
+            <h3>CORE DIAGNOSTICS</h3>
+            <span class="panel-id" id="core-state-tag">STATUS: ONLINE // MODE_NEXUS</span>
           </div>
-          <div class="panel-icon-box" id="panel-icon">
-            Ψ
-          </div>
+          <div class="panel-icon-box" id="core-icon-indicator">⚙</div>
         </div>
 
         <div class="panel-body">
-          <p class="panel-desc" id="panel-desc">
-            Seamlessly integrates direct quantum-dot neuro-coprocessing into the prefrontal cortex, unlocking accelerated memory recall, quantum decryption capabilities, and an auxiliary digital mind matrix.
+          <p class="panel-desc">
+            Directly interface with the central WebGL Quantum Core. Adjust geometric configuration, energy spin speed, sub-space particle density, and color spectrum to align with local sync fields.
           </p>
 
-          <div class="panel-stats">
+          <div class="hud-controls">
             
-            <div class="panel-stat-item">
-              <div class="stat-info">
-                <span class="stat-name">Neural Compatibility</span>
-                <span class="stat-percentage" id="stat-val-comp">98%</span>
-              </div>
-              <div class="stat-bar-outer">
-                <div class="stat-bar-inner" id="stat-bar-comp" style="width: 98%"></div>
-              </div>
-            </div>
-
-            <div class="panel-stat-item">
-              <div class="stat-info">
-                <span class="stat-name">Cognitive Bandwidth</span>
-                <span class="stat-percentage" id="stat-val-band">94%</span>
-              </div>
-              <div class="stat-bar-outer">
-                <div class="stat-bar-inner" id="stat-bar-band" style="width: 94%"></div>
+            <!-- Geometry Selector -->
+            <div class="control-group">
+              <label class="control-label">1. Core Geometry Phase</label>
+              <div class="control-buttons">
+                <button class="tech-btn active" data-geometry="sphere">SPHERE</button>
+                <button class="tech-btn" data-geometry="torus">TORUS</button>
+                <button class="tech-btn" data-geometry="cube">OCTA</button>
               </div>
             </div>
 
-            <div class="panel-stat-item">
-              <div class="stat-info">
-                <span class="stat-name">Processor Efficiency</span>
-                <span class="stat-percentage" id="stat-val-eff">97%</span>
+            <!-- Core Spin Speed Slider -->
+            <div class="control-group">
+              <label class="control-label">2. Energy Core Spin Speed</label>
+              <div class="slider-container">
+                <input type="range" class="tech-slider" id="spin-slider" min="0.5" max="4.0" step="0.1" value="1.5">
+                <span class="slider-display" id="spin-display">1.5x</span>
               </div>
-              <div class="stat-bar-outer">
-                <div class="stat-bar-inner" id="stat-bar-eff" style="width: 97%"></div>
+            </div>
+
+            <!-- Particle Density Slider -->
+            <div class="control-group">
+              <label class="control-label">3. Particle Drift Density</label>
+              <div class="slider-container">
+                <input type="range" class="tech-slider" id="density-slider" min="1000" max="8000" step="500" value="4000">
+                <span class="slider-display" id="density-display">4,000</span>
+              </div>
+            </div>
+
+            <!-- Color Palette Selector -->
+            <div class="control-group" style="margin-bottom: 0;">
+              <label class="control-label">4. Energy Emission Wavefront</label>
+              <div class="color-chips">
+                <div class="color-chip active" data-color="cyan" style="background: var(--neon-cyan);" title="Cyan Link"></div>
+                <div class="color-chip" data-color="magenta" style="background: var(--neon-magenta);" title="Magenta Overload"></div>
+                <div class="color-chip" data-color="green" style="background: var(--neon-green);" title="Matrix Sync"></div>
+                <div class="color-chip" data-color="yellow" style="background: var(--neon-yellow);" title="Solar Burst"></div>
               </div>
             </div>
 
@@ -264,168 +230,157 @@
     </div>
   </section>
 
-  <!-- --- FEATURE MODULES --- -->
-  <section class="features" id="features">
-    <div class="features-container">
+  <!-- --- FEATURE MODULES (ARENA TRACKS) --- -->
+  <section class="tracks" id="tracks">
+    <div class="tracks-container">
       <div class="section-header">
-        <span class="subtitle">System Architecture</span>
-        <h2 class="title">Quantum Augments</h2>
+        <span class="subtitle">CHAMPIONSHIP SCHEMATICS</span>
+        <h2 class="title">Arena Tracks</h2>
       </div>
 
-      <div class="features-grid">
+      <div class="tracks-grid">
         
-        <div class="feature-card glass-card tech-card">
-          <div class="feature-icon-wrapper">👁</div>
-          <h3 class="feature-title">Multi-Spectrum HUD</h3>
-          <p class="feature-desc">Reconstruct visual signals through fluid-lens retinals. View heat maps, electromagnetic field currents, vector trajectory analysis, and combat target scopes inside your normal field of view.</p>
-          <div class="feature-tag">Optical Matrix</div>
+        <div class="track-card glass-card tech-card" data-track-index="1">
+          <div class="track-icon">🤖</div>
+          <h3 class="track-title">ROBOWARS NEXUS</h3>
+          <p class="track-desc">Heavyweight combat machinery collision. Custom build high-power hydraulic combat robots, calibrate wireless links, and fight in our steel cage mesh ring.</p>
+          <div class="track-tag">Robotics Arena</div>
         </div>
 
-        <div class="feature-card glass-card tech-card">
-          <div class="feature-icon-wrapper">🦾</div>
-          <h3 class="feature-title">Carbon Actuator Limbs</h3>
-          <p class="feature-desc">Fibers reinforced with carbon-nanotubes and micro-hydraulics. Replaces default human muscle bounds to afford lifting weights up to 5 metric tons and sub-millisecond physical reflexes.</p>
-          <div class="feature-tag">Actuator Musculature</div>
+        <div class="track-card glass-card tech-card" data-track-index="2">
+          <div class="track-icon">💻</div>
+          <h3 class="track-title">CODE VECTOR</h3>
+          <p class="track-desc">36-hour non-stop algorithmic sprint. Solve complex machine learning paradigms, cryptographic puzzles, and decentralized network optimization challenges.</p>
+          <div class="track-tag">Byte & Logic</div>
         </div>
 
-        <div class="feature-card glass-card tech-card">
-          <div class="feature-icon-wrapper">⚡</div>
-          <h3 class="feature-title">Thorium Fusion Core</h3>
-          <p class="feature-desc">An embedded internal micro-reactor which converts isotopes into high-density power loops. Continuously powers all systems automatically with a self-cooling fluid jacket.</p>
-          <div class="feature-tag">Power Systems</div>
+        <div class="track-card glass-card tech-card" data-track-index="3">
+          <div class="track-icon">🚀</div>
+          <h3 class="track-title">AEROSPACE ORBIT</h3>
+          <p class="track-desc">Design and launch dynamic propellant model rockets and high-agility micro drones. Complete multi-checkpoint obstacle circuits at high aerodynamic speeds.</p>
+          <div class="track-tag">Propulsion & Flight</div>
         </div>
 
       </div>
     </div>
   </section>
 
-  <!-- --- CONFIGURATOR (TIERS & INTERACTIVE PRICING) --- -->
-  <section class="configurator" id="configurator">
+  <!-- --- CHAMPIONSHIP TIMELINE --- -->
+  <section class="schedule" id="schedule">
     <div class="section-header">
-      <span class="subtitle">Configure Sync</span>
-      <h2 class="title">Cybernetic Assembly Hub</h2>
+      <span class="subtitle">TEMPORAL LOGS</span>
+      <h2 class="title">Championship Timeline</h2>
     </div>
 
-    <div class="config-container">
+    <div class="timeline-container">
       
-      <!-- Interactive Input UI -->
-      <div class="config-ui glass-card tech-card">
-        
-        <!-- Selection of Upgrade Tiers -->
-        <div class="config-group">
-          <label class="config-label">1. Choose Augment Base Tier</label>
-          <div class="tier-buttons">
-            <button class="tier-btn" data-tier="initiate">Initiate</button>
-            <button class="tier-btn active" data-tier="pro">Pro Tech</button>
-            <button class="tier-btn" data-tier="apex">Apex Body</button>
-          </div>
+      <div class="timeline-item glass-card tech-card">
+        <div class="timeline-date mono">AUG 15 // PHASE 01</div>
+        <div class="timeline-content">
+          <h4>Portal Registrations Open</h4>
+          <p>Establish neural links, submit team blueprints, and configure customizer credentials for early access seeding.</p>
         </div>
-
-        <!-- Overdrive range slider -->
-        <div class="config-group">
-          <label class="config-label">2. Neural Overdrive Multiplier</label>
-          <div class="slider-wrapper">
-            <input type="range" class="slider" id="overdrive-slider" min="1.0" max="3.0" step="0.1" value="1.8">
-            <div class="slider-val" id="slider-val-display">1.8x</div>
-          </div>
-        </div>
-
-        <!-- Static Tech readout values for aesthetics -->
-        <div class="config-group" style="margin-bottom: 0;">
-          <label class="config-label" style="margin-bottom: 8px;">3. Integration Modules Status</label>
-          <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted); display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-            <div>[+] BIO_CELLS: INTEGRATED</div>
-            <div>[+] COOLING_PUMP: ONLINE</div>
-            <div>[+] COGNITIVE_GATE: LOCKED</div>
-            <div>[+] THORIUM_GRID: DOCKING</div>
-          </div>
-        </div>
-
       </div>
 
-      <!-- Checkout Summary Display Card -->
-      <div class="checkout-panel glass-card tech-card-alt">
-        <div class="checkout-header">
-          <span class="checkout-title">ESTIMATED CONFIGURATION</span>
-          <div class="checkout-tier" id="check-tier-name">Augmented Pro Edition</div>
+      <div class="timeline-item glass-card tech-card">
+        <div class="timeline-date mono">OCT 20 // PHASE 02</div>
+        <div class="timeline-content">
+          <h4>Sub-space Virtual Qualifiers</h4>
+          <p>Online code sprints and algorithmic filtering. Robot blueprint verification & drone simulator testing runs.</p>
         </div>
+      </div>
 
-        <ul class="checkout-list">
-          <li class="checkout-item">
-            <span class="checkout-item-label">Module Tier Price</span>
-            <span class="checkout-item-val" id="checkout-base-price">$49,999</span>
-          </li>
-          <li class="checkout-item">
-            <span class="checkout-item-label">Overdrive Optimization fee</span>
-            <span class="checkout-item-val" id="checkout-overdrive-cost">+$10,000</span>
-          </li>
-          <li class="checkout-item">
-            <span class="checkout-item-label">Neural Compatibility Index</span>
-            <span class="checkout-item-val" id="checkout-comp-val" style="color:var(--neon-cyan)">86%</span>
-          </li>
-          <li class="checkout-item">
-            <span class="checkout-item-label">Cortex Cooling Load</span>
-            <span class="checkout-item-val" id="checkout-cooling-val">55 °C</span>
-          </li>
-        </ul>
-
-        <!-- Custom tier specs list injection point in script -->
-        <div style="margin-bottom: 24px;">
-          <span class="config-label" style="font-size: 0.8rem; margin-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 6px;">Included Augments</span>
-          <ul class="checkout-list" id="checkout-features-list" style="margin-bottom: 0; gap: 8px; font-size: 0.85rem;">
-            <!-- Render dynamically -->
-          </ul>
+      <div class="timeline-item glass-card tech-card">
+        <div class="timeline-date mono">DEC 18 // PHASE 03</div>
+        <div class="timeline-content">
+          <h4>Grand Arena Finals</h4>
+          <p>3-day physical convergence at IIT. Massive audience combat rings, hardware hacking showcases, and keynote speeches.</p>
         </div>
+      </div>
 
-        <div class="total-box">
-          <span class="total-label">TOTAL UPGRADE CREDITS</span>
-          <span class="total-val" id="checkout-total-price">$59,999</span>
+    </div>
+  </section>
+
+  <!-- --- REGISTRATION PORTAL --- -->
+  <section class="register" id="register">
+    <div class="section-header">
+      <span class="subtitle">ESTABLISH SECURE LINK</span>
+      <h2 class="title">Registration Portal</h2>
+    </div>
+
+    <div class="register-container glass-card tech-card-alt">
+      <div class="register-header">
+        <span class="mono">SECURE_LINK_SHELL // INITIATION</span>
+      </div>
+      <form class="register-form" id="register-form" onsubmit="event.preventDefault();">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="reg-name" class="mono">PILOT_NAME</label>
+            <input type="text" id="reg-name" placeholder="e.g. Neo Prime" required>
+          </div>
+          <div class="form-group">
+            <label for="reg-email" class="mono">NEURAL_NET_ADDRESS</label>
+            <input type="email" id="reg-email" placeholder="e.g. connection@nexus.net" required>
+          </div>
         </div>
-
-        <button class="btn-cyber btn-cyber-magenta" id="order-btn" style="width: 100%;">
-          INITIATE SYNC TRANSMISSION
+        <div class="form-row">
+          <div class="form-group">
+            <label for="reg-track" class="mono">ARENA_TRACK_SELECTION</label>
+            <select id="reg-track">
+              <option value="robowars">ROBOWARS NEXUS</option>
+              <option value="codevector">CODE VECTOR HACKATHON</option>
+              <option value="aerospace">AEROSPACE ORBIT</option>
+              <option value="all">MULTI-SPECTRUM ACCESS</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="reg-team" class="mono">FACTION_TEAM_NAME</label>
+            <input type="text" id="reg-team" placeholder="e.g. Syndicate 09" required>
+          </div>
+        </div>
+        <button type="submit" class="btn-cyber btn-cyber-magenta" id="reg-submit-btn" style="width: 100%; margin-top: 16px;">
+          TRANSMIT SECURITY CREDENTIALS
         </button>
-      </div>
-
+      </form>
     </div>
   </section>
 
   <!-- --- FAQ ACCORDION --- -->
   <section class="faq" id="faq">
     <div class="section-header">
-      <span class="subtitle">Neural Database</span>
-      <h2 class="title">Sync Protocols FAQ</h2>
+      <span class="subtitle">KNOWLEDGE GRAPH QUERY</span>
+      <h2 class="title">Database FAQ</h2>
     </div>
 
     <div class="faq-list">
       
       <div class="faq-item glass-card tech-card">
         <div class="faq-question">
-          <h4>What is the surgical downtime for installation?</h4>
+          <h4>Who is eligible to participate in Techfest 2026?</h4>
           <span class="faq-trigger">+</span>
         </div>
         <div class="faq-answer">
-          <p>For standard sub-dermal plates and retinal HUD lenses, downtime is under 90 minutes inside our robotic surgical bays. Full apex body chassis replacements require 48 hours in our sensory suspension pods to allow synaptic binding stabilizer cells to mature.</p>
+          <p>Any student currently enrolled in an undergraduate, postgraduate, or research program worldwide. School teams are eligible for selected junior arenas. Ensure you carry your student RFID card for physical portal check-ins.</p>
         </div>
       </div>
 
       <div class="faq-item glass-card tech-card">
         <div class="faq-question">
-          <h4>Will my neural link integrate with external network nets?</h4>
+          <h4>Are individual registrations allowed, or is a team required?</h4>
           <span class="faq-trigger">+</span>
         </div>
         <div class="faq-answer">
-          <p>Absolutely. The Synapse Cortex V4 uses custom 6G sub-space antenna receivers, affording direct brain-to-net connectivity with hardware firewall protocols. You can surf raw data networks inside your prefrontal cortex.</p>
+          <p>Selected tracks like Code Vector support individual runtimes, while Robowars and Aerospace tracks require structured squads of 2 to 6 pilots. You can register individually and form alliances inside our matchmaking lobby.</p>
         </div>
       </div>
 
       <div class="faq-item glass-card tech-card">
         <div class="faq-question">
-          <h4>Are there any biological rejection risks?</h4>
+          <h4>What hardware and APIs are provided for competitors?</h4>
           <span class="faq-trigger">+</span>
         </div>
         <div class="faq-answer">
-          <p>Rejection rates are below 0.05% due to our micro-engineered organic-metallic alloys and immunosuppressant nano-infusions. The compatibility calculator warns of potential sync risks when pushing overdrive beyond safe levels.</p>
+          <p>For Code Vector, contestants get cloud computing credits, high-speed fiber-node connections, and pre-trained model APIs. Robowars teams receive access to safety pits, welding gear, and 230V battery charging pods.</p>
         </div>
       </div>
 
@@ -438,45 +393,45 @@
       
       <div class="footer-info">
         <a href="#" class="logo" style="font-size: 1.3rem;">
-          <span class="logo-bracket">[</span>SYNAPSE<span class="logo-bracket">]</span>
+          <span class="logo-bracket">[</span>TECHFEST<span class="logo-bracket">]</span>.26
         </a>
         <p class="footer-desc">
-          Pioneering human transcendence and cognitive mechanics since 2088. We build the interfaces that bridge organic tissue with infinite quantum computation.
+          Propelling human innovation and structural engineering since 1998. IIT Bombay's science and technology festival bridges the gap between today's prototypes and tomorrow's realities.
         </p>
         <div class="footer-socials">
-          <a href="#" class="social-icon" title="Net-Terminal">NT</a>
-          <a href="#" class="social-icon" title="Cortex-Grid">CG</a>
-          <a href="#" class="social-icon" title="Quantum-Hub">QH</a>
+          <a href="#" class="social-icon" title="Terminal Access">NT</a>
+          <a href="#" class="social-icon" title="Orbit Control">OC</a>
+          <a href="#" class="social-icon" title="Sync Mesh">SM</a>
         </div>
       </div>
 
       <div>
-        <h4 class="footer-title">Navigation</h4>
+        <h4 class="footer-title">Championships</h4>
         <ul class="footer-links">
-          <li><a href="#features" class="footer-link">Core Augments</a></li>
-          <li><a href="#customizer" class="footer-link">Schematic Map</a></li>
-          <li><a href="#configurator" class="footer-link">Upgrade Hub</a></li>
-          <li><a href="#faq" class="footer-link">FAQ Database</a></li>
+          <li><a href="#tracks" class="footer-link">Robowars</a></li>
+          <li><a href="#tracks" class="footer-link">Code Vector</a></li>
+          <li><a href="#tracks" class="footer-link">Aerospace Orbit</a></li>
+          <li><a href="#tracks" class="footer-link">Bio-Genetics</a></li>
         </ul>
       </div>
 
       <div>
-        <h4 class="footer-title">Security</h4>
+        <h4 class="footer-title">Portal Sec</h4>
         <ul class="footer-links">
           <li><a href="#" class="footer-link">Sync Safety</a></li>
-          <li><a href="#" class="footer-link">Neuro Encryption</a></li>
-          <li><a href="#" class="footer-link">Chassis Registry</a></li>
-          <li><a href="#" class="footer-link">Corporate Terms</a></li>
+          <li><a href="#" class="footer-link">Data Encryption</a></li>
+          <li><a href="#" class="footer-link">Blueprints Registry</a></li>
+          <li><a href="#" class="footer-link">Terms & Protocols</a></li>
         </ul>
       </div>
 
       <div class="footer-newsletter">
-        <h4 class="footer-title">Establish Link</h4>
+        <h4 class="footer-title">Receive Beacon Node</h4>
         <p class="footer-desc" style="font-size: 0.85rem;">
-          Subscribe to our cortex notifications to receive firmware updates and cybernetic announcements directly.
+          Subscribe to our quantum notifications to receive event schedules and updates directly.
         </p>
         <form class="newsletter-form" onsubmit="event.preventDefault(); alert('[SYSTEM LOG]: Newsletter link established.')">
-          <input type="email" class="newsletter-input" placeholder="cortex@address.net" required>
+          <input type="email" class="newsletter-input" placeholder="pilot@address.net" required>
           <button type="submit" class="newsletter-btn">LINK</button>
         </form>
       </div>
@@ -484,9 +439,9 @@
     </div>
 
     <div class="footer-bottom">
-      <span class="footer-copy">© 2088 Synapse Cybernetics Corp. // All Rights Reserved.</span>
+      <span class="footer-copy">© 2026 Techfest Corp. // IIT Bombay // All Rights Reserved.</span>
       <span class="footer-disclaimer">
-        [WARNING] Synapse Corp does not assume responsibility for temporary memory wipes, spontaneous ghost migration, or unauthorized digital hacking of biological cores.
+        [WARNING] Techfest does not assume responsibility for physical damage to robotic actuators, neural fatigue during hackathons, or spontaneous drone signal drops in high electromagnetic areas.
       </span>
     </div>
   </footer>
